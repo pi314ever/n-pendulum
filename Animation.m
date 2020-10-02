@@ -1,7 +1,9 @@
-function Animation(theta,time,P)
+function Animation(x,time,P)
+% Animates n-particle pendulum
 figure
 l = P.l;
 n = length(l);
+theta = x(1:n,:);
 len = sum(l);
 Px = zeros(n,length(time));
 Py = zeros(n,length(time));
@@ -26,7 +28,7 @@ for ii = 1:length(time)
     axis(axisVec)
     drawnow
     %toc
-    pause(.001)
+    pause(.01)
 end
 
 end

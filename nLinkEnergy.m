@@ -1,10 +1,12 @@
-function [] = nLinkEnergy(theta,w,time,P)
+function [] = nLinkEnergy(x,time,P)
 %nLinkEnergy 
 %   Plots PE/KE/Total Energy vs time in a new figure
 g = P.g;
 l = P.l;
 m = P.m;
 n = length(m);
+theta = x(1:n,:);
+w = x(n+1:2*n,:);
 
 PE = zeros(n,length(time));
 KE = zeros(n,length(time));
@@ -14,10 +16,10 @@ for ii = 1:n
     end
 end
 
-for k = 1:n
+parfor k = 1:n
     for ii = 1:k
         for jj = 1:k
-            KE(ii,:) = KE(ii,:) + 1/2*m(k)*l(ii)*l(jj)*...
+            KE(k,:) = KE(k,:) + 1/2*m(k)*l(ii)*l(jj)*...
                 w(ii,:).*w(jj,:).*cos(theta(ii,:)-theta(jj,:));
         end
     end
@@ -40,25 +42,25 @@ ylabel('Energy [J]')
 
 figure
 for ii = 1:n
-    PElabel = strcat('PE_',num2str(ii));
+    PElabel = sprintf('PE_{%i}',ii);
     plot(time,PE(ii,:),'--','DisplayName',PElabel)
     hold on
 end
 title('Potential Energy per Particle')
 xlabel('Time [s]')
 ylabel('Energy [J]')
-legend('location','best')
+legend('location','bestoutside')
 
 figure
 for ii = 1:n
-    KElabel = strcat('KE_',num2str(ii));
+    KElabel = sprintf('KE_{%i}',ii);
     plot(time,KE(ii,:),'-.','DisplayName',KElabel)
     hold on
 end
 title('Kinetic Energy per Particle')
 xlabel('Time [s]')
 ylabel('Energy [J]')
-legend('location','best')
+legend('location','bestoutside')
 
 end
 

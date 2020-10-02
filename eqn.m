@@ -27,14 +27,12 @@ for ii = 1:n
     end
 end
 
-for k = 1:n
+parfor k = 1:n
     for jj = k:n
         for ii = 1:jj
-            f_vec(k) = f_vec(k)+m(jj)*L(jj)*L(ii)*x(n+ii)*sin(x(k)-x(ii))*...
-                (x(ii)-x(k));
-        end
-        for ii = 1:n
-            g_vec(k) = g_vec(k)+1/2*L(k)*x(n+k)*m(jj)*L(ii)*x(n+ii)*...
+            f_vec(k) = f_vec(k)+m(jj)*L(k)*L(ii)*x(n+ii)*sin(x(k)-x(ii))*...
+                (x(n+ii)-x(n+k));
+            g_vec(k) = g_vec(k)+L(k)*x(n+k)*m(jj)*L(ii)*x(n+ii)*...
                 sin(x(ii)-x(k));
         end
     end
