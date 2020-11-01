@@ -27,7 +27,7 @@ for ii = 1:n
     end
 end
 
-parfor k = 1:n
+for k = 1:n
     for jj = k:n
         for ii = 1:jj
             f_vec(k) = f_vec(k)+m(jj)*L(k)*L(ii)*x(n+ii)*sin(x(k)-x(ii))*...

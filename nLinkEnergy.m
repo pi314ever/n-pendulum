@@ -16,7 +16,7 @@ for ii = 1:n
     end
 end
 
-parfor k = 1:n
+for k = 1:n
     for ii = 1:k
         for jj = 1:k
             KE(k,:) = KE(k,:) + 1/2*m(k)*l(ii)*l(jj)*...
